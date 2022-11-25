@@ -5,6 +5,7 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.*;
@@ -26,5 +27,29 @@ public class JSONtoJAVATest extends SpartanTestBase {
 
         Map<String, Object> jsonMap = response.as(Map.class);
 
+        System.out.println(jsonMap.toString());
+        //after we got the map, we can use hamcrest or junit assertions to do assertion
+
     }
-}
+
+        @DisplayName("GET all spartans to JAVA data structure")
+        @Test
+        public void getAllSpartan(){
+
+        Response response = get("/api/spartans").then().statusCode(200).extract().response();
+
+        //we need to convert json to java which is deserialized
+
+            List<Map<String,Object>> jsonList = response.as(List.class);
+
+            System.out.println("jsonList.get(1).get(\"name\") = " + jsonList.get(1).get("name"));
+
+            Map<String,Object> spartan3 = jsonList.get(2);
+
+            System.out.println(spartan3);
+
+
+        }
+
+
+        }

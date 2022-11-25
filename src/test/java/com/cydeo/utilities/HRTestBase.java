@@ -11,5 +11,7 @@ public abstract class HRTestBase {
     public static void init() {
         //save baseurl inside this variable so that we dont need to type each http method.
         baseURI = "http://3.86.103.110:1000/ords/hr";
+
+
     }
 }
